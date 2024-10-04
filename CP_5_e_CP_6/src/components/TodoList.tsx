@@ -1,6 +1,6 @@
 // src/components/TodoList.tsx
 import React, { useEffect, useState } from 'react';
-import { getTodosByTarget, deleteTodo } from '../api';
+import { getTodosByTarget, deleteTodo } from '../api.ts';
 
 interface Todo {
   id: string;
@@ -28,7 +28,7 @@ const TodoList: React.FC<Props> = ({ targetId }) => {
   };
 
   const handleDelete = async (todoId: string) => {
-    if (window.confirm('Are you sure you want to delete this todo?')) {
+    if (window.confirm('Tem certeza de que deseja excluir este TODO?')) {
       await deleteTodo(todoId);
       fetchTodos();
     }
