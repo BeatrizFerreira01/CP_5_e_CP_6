@@ -1,40 +1,29 @@
-// src/components/FormTodo.tsx
 import React, { useState } from 'react';
-import { createTodo, updateTodo } from '../api';
 
-interface Props {
+interface FormTodoProps {
   targetId: string;
-  todoId?: string;
-  onSubmit: () => void;
+  onSubmit: (targetId: string, description: string) => void;
 }
 
-const FormTodo: React.FC<Props> = ({ targetId, todoId, onSubmit }) => {
-  const [title, setTitle] = useState('');
+const FormTodo: React.FC<FormTodoProps> = ({ targetId, onSubmit }) => {
+  const [description, setDescription] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (todoId) {
-      await updateTodo(todoId);
-    } else {
-      await createTodo(targetId);
-    }
-    setTitle('');
-    onSubmit();
+    onSubmit(targetId, description);
+    setDescription(''); // Limpa o campo após o envio
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
+    <form onSubmit={handleSubmit} className="form-todo">
       <input
         type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="TODO Title"
-        required
-        style={{ padding: '10px', width: '70%', marginRight: '10px' }}
+        placeholder="Descrição do TODO"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className="todo-input"
       />
-      <button type="submit" style={{ padding: '10px 20px' }}>
-        {todoId ? 'Editar' : 'Criar'} TODO
-      </button>
+      <button type="submit" className="save-todo-button">Salvar TODO</button>
     </form>
   );
 };

@@ -1,39 +1,30 @@
-// src/components/FormTarget.tsx
 import React, { useState } from 'react';
-import { createTarget, updateTarget } from '../api';
+import { createTarget } from '../api';
 
-interface Props {
-  targetId?: string;
-  onSubmit: () => void;
+interface FormTargetProps {
+  onSubmit: (name: string) => void; // Passa o nome do target para a função de submit
 }
 
-const FormTarget: React.FC<Props> = ({ targetId, onSubmit }) => {
+const FormTarget: React.FC<FormTargetProps> = ({ onSubmit }) => {
   const [name, setName] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (targetId) {
-      await updateTarget(targetId, name);
-    } else {
-      await createTarget(name);
-    }
-    setName('');
-    onSubmit();
+    onSubmit(name); // Passa o nome do target ao submeter
+    createTarget(name);
+    setName(''); // Limpa o campo após o envio
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
+    <form onSubmit={handleSubmit} className="form-target">
       <input
         type="text"
+        placeholder="Nome do Target"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Target Name"
-        required
-        style={{ padding: '10px', width: '70%', marginRight: '10px' }}
+        className="target-input"
       />
-      <button type="submit" style={{ padding: '10px 20px' }}>
-        {targetId ? 'Editar' : 'Criar'} Target
-      </button>
+      <button type="submit" className="save-target-button">Salvar Target</button>
     </form>
   );
 };

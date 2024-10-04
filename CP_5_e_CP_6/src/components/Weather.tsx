@@ -1,7 +1,6 @@
-// src/components/Weather.tsx
 import React, { useEffect, useState } from 'react';
-import { getWeather } from '../api';
-import '../index.css'; // Assegure-se de que o CSS está importado
+import { getWeather } from '../api.ts';
+import '../src/index.css'; // Assegure-se de que o CSS está importado
 
 interface WeatherData {
   location: {
@@ -20,34 +19,34 @@ interface WeatherData {
 
 const Weather: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [location, setLocation] = useState('São Paulo'); // Localização padrão
+  const [location, setLocation] = useState(''); // Localização padrão removida
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const response = await getWeather(location);
+        setWeather(response.data);
+        setError(false);
+      } catch (err) {
+        console.error('Error fetching weather data:', err);
+        setError(true);
+      }
+    };
+  
     fetchWeather();
   }, [location]);
 
-  const fetchWeather = async () => {
-    try {
-      const response = await getWeather(location);
-      setWeather(response.data);
-      setError(false);
-    } catch (err) {
-      console.error('Error fetching weather data:', err);
-      setError(true);
-    }
-  };
-
   return (
     <div>
+      {/* Removido o cabeçalho duplicado */}
       <div className="search-section">
         <div className="input-wrapper">
-          <span className="material-symbols-rounded">search</span>
           <input
             type="search"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter a city name"
+            placeholder="Digite a localização"
             className="search-input"
           />
         </div>
@@ -65,26 +64,26 @@ const Weather: React.FC = () => {
             }
           },
           () => {
-            alert("Location access denied. Please enable permissions to use this feature.");
+            alert("Localização não acessada. Por favor, habilite as permissões para usar este recurso.");
           }
         )}>
-          <span className="material-symbols-rounded">my_location</span>
+          Inserir localização atual
         </button>
       </div>
 
       {error ? (
         <div className="no-results">
-          <img src="/src/assets/no-result.svg" alt="No results found" className="icon" />
-          <h3 className="title">Something went wrong!</h3>
+          <img src="/src/assets/no-result.svg" alt="Nenhum resultado encontrado" className="icon" />
+          <h3 className="title">Algo deu errado!</h3>
           <p className="message">
-            We're unable to retrieve the weather details. Ensure you've entered a valid city or try again later.
+            Não conseguimos recuperar os detalhes do clima. Certifique-se de ter inserido uma cidade válida ou tente novamente mais tarde.
           </p>
         </div>
       ) : (
         weather && (
           <div className="weather-section">
             <div className="current-weather">
-              <img src={weather.current.condition.icon} className="weather-icon" alt="Weather icon" />
+              <img src={weather.current.condition.icon} className="weather-icon" alt="Ícone do clima" />
               <h2 className="temperature">
                 {weather.current.temp_c}<span>°C</span>
               </h2>
@@ -92,23 +91,16 @@ const Weather: React.FC = () => {
             </div>
             {/* Previsão Horária */}
             <div className="hourly-weather">
-              {/* Aqui você pode adicionar a lógica para exibir a previsão horária */}
-              <ul className="weather-list">
-                {/* Exemplo de previsão horária */}
-                {/* 
-                {weather.forecast.forecastday[0].hour.map((hour) => (
-                  <li key={hour.time} className="weather-item">
-                    <p className="time">{hour.time.substring(11, 16)}</p>
-                    <img src={hour.condition.icon} className="weather-icon" alt="Weather icon" />
-                    <p className="temperature">{hour.temp_c}°</p>
-                  </li>
-                ))} 
-                */}
-              </ul>
+              <ul className="weather-list"></ul>
             </div>
           </div>
         )
       )}
+
+      {/* Linha de separação */}
+      <hr className="separator" />
+
+      {/* Aqui você pode adicionar a seção de Targets */}
     </div>
   );
 };

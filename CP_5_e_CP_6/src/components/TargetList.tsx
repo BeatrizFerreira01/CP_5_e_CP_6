@@ -1,6 +1,6 @@
-// src/components/TargetList.tsx
 import React, { useEffect, useState } from 'react';
-import { getTargets, deleteTarget } from '../api';
+import { getTargets } from '../api.ts'; // Assegure-se de que o caminho esteja correto
+import '../src/components/TargetList.tsx'; // Importa o CSS para o componente
 
 interface Target {
   id: string;
@@ -8,10 +8,12 @@ interface Target {
 }
 
 interface Props {
+  targets: Target[];
   onSelect: (targetId: string) => void;
+  onDelete: (targetId: string) => Promise<void>; // Espera uma função que retorna uma Promise
 }
 
-const TargetList: React.FC<Props> = ({ onSelect }) => {
+const TargetList: React.FC<Props> = ({ onSelect, onDelete }) => {
   const [targets, setTargets] = useState<Target[]>([]);
 
   useEffect(() => {
@@ -28,9 +30,9 @@ const TargetList: React.FC<Props> = ({ onSelect }) => {
   };
 
   const handleDelete = async (targetId: string) => {
-    if (window.confirm('Are you sure you want to delete this target?')) {
-      await deleteTarget(targetId);
-      fetchTargets();
+    if (window.confirm('Tem certeza de que deseja excluir este target?')) {
+      await onDelete(targetId); // Chama a função onDelete recebida por props
+      fetchTargets(); // Atualiza a lista de targets após exclusão
     }
   };
 
@@ -40,10 +42,10 @@ const TargetList: React.FC<Props> = ({ onSelect }) => {
       <ul>
         {targets.map((target) => (
           <li key={target.id}>
-            <span onClick={() => onSelect(target.id)} style={{ cursor: 'pointer', color: '#5f41e4' }}>
+            <span onClick={() => onSelect(target.id)} className="target-name">
               {target.name}
             </span>
-            <button onClick={() => handleDelete(target.id)} style={{ marginLeft: '10px' }}>
+            <button onClick={() => handleDelete(target.id)} className="target-button">
               Excluir
             </button>
           </li>

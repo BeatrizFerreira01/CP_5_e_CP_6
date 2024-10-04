@@ -1,6 +1,5 @@
 /* Importing Google Fonts - Montserrat */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 
 * {
   margin: 0;
@@ -10,55 +9,220 @@
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #5f41e4;
+  background: #f0f4f8; /* Fundo suave */
+  padding: 40px; /* Adicionando um espaçamento ao redor */
+  display: block; /* Para permitir a rolagem da página */
+  overflow-y: auto; /* Habilitando a rolagem vertical */
 }
 
+/* Container principal */
 .container {
-  flex-grow: 1;
-  overflow: hidden;
-  max-width: 425px;
-  border-radius: 10px;
-  position: relative;
-  background: #fff;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  max-width: 900px; /* Largura adequada para desktops */
+  margin: 0 auto; /* Centralizando o container */
+  padding: 40px;
+  background: #ffffff; /* Fundo branco */
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+  text-align: center;
+  border: 1px solid #d1d9e6; /* Borda sutil */
+  margin-bottom: 50px; /* Espaçamento inferior para quando rolar */
 }
 
+h1 {
+  font-size: 2.5rem;
+  color: #37474f;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #5f41e4;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1rem;
+  color: #607d8b;
+}
+
+/* Seção de clima */
+.weather-section {
+  margin-top: 40px;
+}
+
+.weather-section .current-weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.current-weather .weather-icon {
+  width: 150px;
+}
+
+.current-weather .temperature {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #37474f;
+  margin: 20px 0;
+}
+
+.current-weather .description {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #607d8b;
+}
+
+/* Previsão horária */
+.hourly-weather {
+  margin-top: 20px;
+  padding: 25px;
+  border-top: 1px solid #cfd8dc;
+}
+
+.hourly-weather .weather-list {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.hourly-weather .weather-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  color: #607d8b;
+}
+
+.hourly-weather .weather-item .weather-icon {
+  width: 40px;
+}
+
+/* Inputs e botões */
+input {
+  width: 100%;
+  max-width: 100%; /* Faz o input ocupar todo o espaço disponível */
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+  background: #f7f9fc;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #37474f;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #5f41e4;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: #5f41e4;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #4b33c3;
+}
+
+/* Target List Section */
+.target-list {
+  margin-top: 40px;
+}
+
+.target-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #e0e7ff;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #37474f;
+}
+
+.target-list-item button {
+  background-color: #ef5350;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.target-list-item button:hover {
+  background-color: #d32f2f;
+}
+
+/* TODO List Section */
+.todo-list {
+  margin-top: 20px;
+}
+
+.todo-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff3e0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #37474f;
+}
+
+.todo-list-item button {
+  background-color: #ff9800;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.todo-list-item button:hover {
+  background-color: #fb8c00;
+}
+
+/* Seção de busca por localização */
 .search-section {
   display: flex;
-  gap: 10px;
-  padding: 25px;
-  align-items: center;
+  justify-content: space-between; /* Mantém as caixas separadas à esquerda e à direita */
+  align-items: center; /* Alinha verticalmente no centro */
+  gap: 20px; /* Espaço entre a caixa de input e o botão */
+  margin-bottom: 30px; /* Espaçamento inferior para o restante da página */
 }
 
+/* Estilo para a caixa de input de localização */
 .search-section .input-wrapper {
-  height: 54px;
-  width: 100%;
-  position: relative;
-}
-
-.search-section .input-wrapper span {
-  position: absolute;
-  top: 50%;
-  left: 17px;
-  pointer-events: none;
-  transform: translateY(-50%);
+  flex-grow: 1; /* Faz a caixa de input ocupar a maior parte do espaço disponível */
 }
 
 .search-section .search-input {
-  height: 100%;
   width: 100%;
-  outline: none;
   font-size: 1rem;
   font-weight: 500;
+  padding: 12px 20px;
   border-radius: 6px;
-  text-transform: uppercase;
-  padding: 0 20px 0 50px;
   border: 1px solid #beb0ff;
   background: #fff;
+  text-transform: uppercase;
   transition: 0.1s ease;
 }
 
@@ -71,148 +235,35 @@ body {
   text-transform: none;
 }
 
+/* Estilo para o botão de localização */
 .search-section .location-button {
   height: 54px;
-  width: 56px;
-  cursor: pointer;
-  flex-shrink: 0;
+  width: 130px; /* Botão maior para equilibrar o layout */
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  background: #fff;
-  color: #5f41e4;
-  border: 1px solid #beb0ff;
+  background: #5f41e4;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
   transition: 0.3s ease;
 }
 
 .search-section .location-button:hover {
-  color: #fff;
-  background: #5f41e4;
-  border-color: #5f41e4;
+  background: #4b33c3;
 }
 
 .search-section .location-button span {
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
-.no-results {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 100%;
-  display: none;
-  padding: 40px;
-  text-align: center;
-  align-items: center;
-  flex-direction: column;
-  transform: translate(-50%, -50%);
-  transition: 0.2s ease;
+/* src/components/TargetList.css */
+.target-name {
+  cursor: pointer;
+  color: #5f41e4;
 }
 
-body.show-no-results .no-results {
-  display: flex;
-}
-
-.no-results .title {
-  font-weight: 700;
-  margin: 25px 0 15px;
-}
-
-.no-results .message {
-  font-weight: 500;
-  line-height: 23px;
-}
-
-body.show-no-results .weather-section {
-  visibility: hidden;
-}
-
-.weather-section {
-  padding: 20px;
-}
-
-.weather-section .current-weather {
-  display: flex;
-  padding: 20px 0 50px;
-  flex-direction: column;
-  align-items: center;
-}
-
-.current-weather .weather-icon {
-  width: 140px;
-  aspect-ratio: 1;
-}
-
-.current-weather .temperature {
-  font-size: 3.38rem;
-  margin: 23px 0;
-  display: flex;
-}
-
-.current-weather .temperature span {
-  font-size: 1.56rem;
-  font-weight: 500;
-  margin: 5px 0 0 2px;
-}
-
-.current-weather .description {
-  font-weight: 500;
-  font-size: 1.25rem;
-}
-
-.hourly-weather {
-  padding: 16px 25px;
-  border-top: 1px solid #d5ccff;
-}
-
-.hourly-weather .weather-list {
-  display: flex;
-  gap: 41px;
-  overflow-x: auto;
-  padding-bottom: 16px;
-  margin-bottom: -16px;
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
-}
-
-.hourly-weather:hover .weather-list {
-  scrollbar-color: #bfbfbf transparent;
-}
-
-.hourly-weather .weather-list .weather-item {
-  display: flex;
-  gap: 7px;
-  width: 60px;
-  font-weight: 500;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hourly-weather .weather-item .weather-icon {
-  width: 28px;
-  aspect-ratio: 1;
-}
-
-/* Responsive media query code for small screen */
-@media (max-width: 624px) {
-  body {
-    padding: 15px;
-  }
-
-  .search-section {
-    padding: 20px;
-  }
-
-  .no-results {
-    padding: 30px;
-  }
-
-  .hourly-weather {
-    padding: 16px 20px;
-  }
-
-  .hourly-weather .weather-list {
-    gap: 32px;
-  }
+.target-button {
+  margin-left: 10px;
 }
